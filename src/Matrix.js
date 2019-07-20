@@ -5,12 +5,21 @@ import ColorSelector from './ColorSelector.js'
 
 export default class Matrix extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.state = {
+      color: this.props.color 
+    }
   }
+    setColor = (value) => {
+      this.setState({
+       color: value 
+      })
+    }
+  grabColor = () => this.state.color 
 
   genRow = (vals) => (
-    vals.map((val, idx) => <Cell key={idx} color={val} />)
+    vals.map((val, idx) => <Cell key={idx} color={val} setColor={this.grabColor} />)
   )
 
   genMatrix = () => (
@@ -21,7 +30,7 @@ export default class Matrix extends Component {
   render() {
     return (
       <div id="app">
-        <ColorSelector />
+        <ColorSelector setColor={this.setColor} />
         <div id="matrix">
           {this.genMatrix()}
         </div>
@@ -30,6 +39,7 @@ export default class Matrix extends Component {
   }
 
 }
+
 
 Matrix.defaultProps = {
   values: chromeBoi
