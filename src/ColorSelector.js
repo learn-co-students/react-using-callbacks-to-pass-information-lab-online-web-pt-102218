@@ -7,6 +7,10 @@ export default class ColorSelector extends Component {
       return <div key={idx} className="color-swatch" style={{backgroundColor: str}}/>
     })
   )
+
+  updateColor = (e) => {
+    this.props.setColor(e.target.style.backgroundColor)
+  }
   
   render() {
     return (
